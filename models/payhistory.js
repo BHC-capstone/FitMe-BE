@@ -1,35 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('certifications', {
+  return sequelize.define('payhistory', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    trainer_id: {
+    user_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'trainers',
-        key: 'id'
-      }
+      allowNull: true
     },
-    name: {
+    tid: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    image_url: {
+    created: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    approved: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    status: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    certification_s3_key: {
+    payname: {
       type: DataTypes.STRING(255),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'certifications',
+    tableName: 'payhistory',
     timestamps: false,
     indexes: [
       {
@@ -38,13 +46,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
-        ]
-      },
-      {
-        name: "trainer_id",
-        using: "BTREE",
-        fields: [
-          { name: "trainer_id" },
         ]
       },
     ]
